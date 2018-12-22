@@ -30,7 +30,7 @@ def register_user():
 	if not (re.match(name_format, username)):
 		return jsonify({'message' : 'Invalid username'}), 400
 
-	if len(fname) or len(lname) < 4:
+	if len(fname) < 4 or len(lname) < 4 or len(username) < 4:
 		return jsonify({"message" : "length of name or username is too short"}), 400
 
 
