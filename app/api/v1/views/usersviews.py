@@ -33,5 +33,10 @@ def register_user():
 	if len(fname) < 4 or len(lname) < 4 or len(username) < 4:
 		return jsonify({"message" : "length of name or username is too short"}), 400
 
+	if not password:
+		return jsonify({'message' : 'password cannot be left blank'}), 400
+
+	if len(password) < 8:
+		return jsonify({'message' : 'password should bee atleast 8 characters'}), 400
 
 	return jsonify({'message' : 'user registration succesfull'})
