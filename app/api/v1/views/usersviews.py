@@ -17,7 +17,7 @@ def register_user():
 	email = data["email"]
 	password = data["password"]
 
-	emai_format = re.compile(
+	email_format = re.compile(
 		r"(^[a-zA-Z0-9_.-]+@[a-zA-Z-]+\.[a-zA-Z-]+$)")
 	name_format = re.compile(r"(^[A-Za-z]+$)")
 
@@ -37,6 +37,8 @@ def register_user():
 		return jsonify({'message' : 'password cannot be left blank'}), 400
 
 	if len(password) < 8:
-		return jsonify({'message' : 'password should bee atleast 8 characters'}), 400
+		return jsonify({'message' : 'password should be atleast 8 characters'}), 400
 
+	if not (re.match(email_format, email)):
+		return jsonify({'message' : 'Invalid email, ensure email is of the form example1@mail.com'})
 	return jsonify({'message' : 'user registration succesfull'})
