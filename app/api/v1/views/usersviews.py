@@ -1,21 +1,22 @@
 from flask import Blueprint, jsonify, request
 from app.api.v1.models.usersmodels import UserModel
-
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import re
 
 v1_user = Blueprint('UserModel', __name__)
 
-#user_instance = UserModel() #User class instance
+user_instance = UserModel() #User class instance
 
 @v1_user.route('/register',methods=['POST'])
-def register_user():
+def sign_up():
 	data = request.get_json()
 	fname = data["fname"]
 	lname = data["lname"]
 	username = data["username"]
 	email = data["email"]
 	password = data["password"]
+	hashed_pass = generate_password_hash(password, method='sha256')
 
 	email_format = re.compile(
 		r"(^[a-zA-Z0-9_.-]+@[a-zA-Z-]+\.[a-zA-Z-]+$)")
@@ -41,4 +42,17 @@ def register_user():
 
 	if not (re.match(email_format, email)):
 		return jsonify({'message' : 'Invalid email, ensure email is of the form example1@mail.com'})
-	return jsonify({'message' : 'user registration succesfull'})
+
+	if data['username'] in user_instance.users:
+		return jsonify({"message" : "username already exists"}), 400
+
+	user_instance.sign_up(
+		fname=fname,
+		lname=lname,
+		username=username,
+		email=email,
+		password=hashed_pass
+		)
+
+	
+	return jsonify({'message' : 'user registration succesfull', 'Users' : user_instance.users}), 201
