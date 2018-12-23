@@ -11,7 +11,7 @@ def create_app(env_name):
 
 	app = Flask(__name__)
 	app.config.from_object(app_config[env_name])
-	app.register_blueprint(v1_user)
+	app.register_blueprint(v1_user, url_prefix='/api/v1')
 
 
 	return app
