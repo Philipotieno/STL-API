@@ -75,4 +75,4 @@ def login():
 	if not check_password_hash(user['password'], data['password']):
 		return jsonify({"message" : "enter the right password"}), 200
 		
-	return jsonify({"message" : "log in succesfull"}), 401
+	return jsonify({"message" : "You are now logged in", "username" : username}), 401
