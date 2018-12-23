@@ -56,3 +56,23 @@ def sign_up():
 
 	
 	return jsonify({'message' : 'user registration succesfull', 'Users' : user_instance.users}), 201
+
+@v1_user.route('/login', methods=['POST'])
+def login():
+	data = request.get_json()
+
+	username = data['username']
+	password = data['password']
+
+	if not username or not password:
+		return jsonify({'message' : 'Input all required fields'}), 400
+
+	if not data["username"] in user_instance.users:
+		return jsonify({'message' : 'user not registered'}), 401
+
+	user = user_instance.users[username]
+
+	if not check_password_hash(user['password'], data['password']):
+		return jsonify({"message" : "enter the right password"}), 200
+		
+	return jsonify({"message" : "log in succesfull"}), 401
