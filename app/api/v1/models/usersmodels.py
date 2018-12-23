@@ -3,7 +3,7 @@ class UserModel(object):
 		self.users = {}
 
 	def sign_up(self, fname, lname, username, email, password):
-		user_id = str(len(self,users) + 1)
+		user_id = str(len(self.users) + 1)
 		reg_user = {
 			"id" : user_id,
 			"fname" : fname,
@@ -13,5 +13,5 @@ class UserModel(object):
 			"password" : password
 		}
 
-		self.username[username] = reg_user
+		self.users[username] = reg_user
 		return self.users
