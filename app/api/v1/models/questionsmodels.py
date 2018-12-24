@@ -18,7 +18,7 @@ class Questions():
 		if self.questions:
 			return self.questions
 
-	def get_specific_question(question_id)):
+	def get_specific_question(self, question_id):
 		""" Fetch a specific order using given id"""
         if self.questions:
             for qns in self.questions.values():
