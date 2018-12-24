@@ -17,3 +17,10 @@ class Questions():
 		'''Method to fetch all questions'''
 		if self.questions:
 			return self.questions
+
+	def get_specific_question(question_id)):
+		""" Fetch a specific order using given id"""
+        if self.questions:
+            for qns in self.questions.values():
+                if qns["id"] == question_id:
+                    return qns
