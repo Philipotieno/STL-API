@@ -6,9 +6,8 @@ class Questions():
 		quetion_id = str(len(self.questions) + 1)
 		new_question = {
 			"id" : question_id,
-				"qns" : qns,
-				"total" : total
-				"status" : "not answered"
+				"title" : title,
+				"content" : content
 		}
 
 		self.questions[question_id] = new_question
