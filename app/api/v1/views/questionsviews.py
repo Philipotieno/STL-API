@@ -28,3 +28,11 @@ def get_questions():
 		return jsonify({'message' : 'no questions posted'}), 404
 
 	return jsonify({"Questions" : all_qns}), 200
+
+@v1_questions.route('<question_id>', methods=['GET'])
+def get_specific_questions(question_id):
+	a_qns = questions.get_specific_question(question_id)
+	if not a_qns:
+		return jsonify({'message' : 'no such question posted'}), 404
+
+	return jsonify({"Questions" : a_qns}), 200
