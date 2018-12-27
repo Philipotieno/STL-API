@@ -25,3 +25,9 @@ class Questions():
 			for qns in self.questions.values():
 				if qns["id"] == question_id:
 					return qns
+	def answer_qn(self, question_id, answer):
+		""" Method to answer a specific question"""
+		answered_qns = self.get_specific_question(question_id)
+		if answered_qns:
+			answered_qns["answer"] = answer
+			return answered_qns
