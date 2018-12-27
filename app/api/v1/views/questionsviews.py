@@ -37,3 +37,14 @@ def get_specific_questions(question_id):
 
 	return jsonify({"Questions" : a_qns}), 200
 
+@v1_questions.route('<question_id>', methods=['PUT'])
+def answer_qns(question_id):
+	data = request.get_json()
+
+	all_qns = questions.get_all_questions()
+	if not all_qns:
+		return jsonify({'message' : 'questions not found'}), 404
+
+	new_answer = data['answer']
+	questions.answer_qn(question_id, new_answer)
+	return jsonify({'message' : 'you have posted an answer'})
