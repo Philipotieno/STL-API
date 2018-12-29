@@ -8,7 +8,8 @@ class Questions():
 			"id" : question_id,
 				"title" : title,
 				"content" : content,
-				"answer" : "no answer"
+				"answer" : "no answer",
+				"answer_status" : "pending"
 		}
 
 		self.questions[question_id] = new_question
@@ -30,4 +31,11 @@ class Questions():
 		answered_qns = self.get_specific_question(question_id)
 		if answered_qns:
 			answered_qns["answer"] = answer
+			return answered_qns
+
+	def accept_ans(self, question_id, answer_status):
+		""" Method to acdept an answer a specific question"""
+		answered_qns = self.get_specific_question(question_id)
+		if answered_qns:
+			answered_qns["answer_status"] = answer_status
 			return answered_qns
