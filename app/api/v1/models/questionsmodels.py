@@ -8,7 +8,7 @@ class Questions():
 			"id" : question_id,
 				"title" : title,
 				"content" : content,
-				"answer" : "no answer"
+				"answer" : "no answer",
 				"answer_status" : "pending"
 		}
 
