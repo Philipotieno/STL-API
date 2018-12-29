@@ -43,11 +43,11 @@ def answer_qns(question_id):
 
 	all_qns = questions.get_all_questions()
 	if not all_qns:
-		return jsonify({'message' : 'questions not found'}), 404
+		return jsonify({'message' : 'questions not found'}), 404
 
 	new_answer = data['answer']
 	questions.answer_qn(question_id, new_answer)
-	return jsonify({'message' : 'you have posted an answer'})
+	return jsonify({'message' : 'you have posted an answer'}), 200
 
 
 @v1_questions.route('<question_id>', methods=['POST'])
@@ -60,4 +60,4 @@ def accept_ans(question_id):
 
 	new_status = data['answer_status']
 	questions.accept_ans(question_id, new_status)
-	return jsonify({'message' : 'your response has been recorded'})
+	return jsonify({'message' : 'your response has been recorded'}), 200
