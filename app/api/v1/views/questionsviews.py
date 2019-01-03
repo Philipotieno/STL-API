@@ -61,3 +61,12 @@ def accept_ans(question_id):
 	new_status = data['answer_status']
 	questions.accept_ans(question_id, new_status)
 	return jsonify({'message' : 'your response has been recorded'}), 200
+
+@v1_questions.route('<question_id>', methods=['DELETE'])
+def delete_question(question_id):
+	all_qns = questions.get_all_questions()
+	if question_id in all_qns:
+		del all_qns[question_id]
+		return jsonify({'Message':'Deleted succesfully'}), 201
+
+	return jsonify({'Message':'No such question'}), 404
