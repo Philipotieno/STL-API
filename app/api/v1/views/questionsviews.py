@@ -64,9 +64,11 @@ def accept_ans(question_id):
 
 @v1_questions.route('<question_id>', methods=['DELETE'])
 def delete_question(question_id):
-	all_qns = questions.get_all_questions()
-	if question_id in all_qns:
-		del all_qns[question_id]
-		return jsonify({'Message':'Deleted succesfully'}), 201
-
+	qns = questions.get_all_questions()
+	if qns:
+		try:
+			del qns[question_id]
+			return jsonify({'Message':'Deleted succesfully'}), 201
+		except KeyError:
+			return jsonify({'Message':'No such question'}), 404
 	return jsonify({'Message':'No such question'}), 404
